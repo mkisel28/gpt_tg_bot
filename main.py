@@ -80,7 +80,7 @@ def add_limit(message):
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
-    await message.reply("????I'm a bot, and I use ChatGPT3.5 model\n*You have 3 free attempts.*\n*Send me a message.*\nRequest example: `Write me a short script for a love movie`\n\nIf you want full access, contact  @AgentGarbo.\n\n\n????� ���, � � ��������� ������ ChatGPT3.5\n*� ��� ���� 3 ���������� �������.*\n*������� ��� ���������*\n������ �������: `������ ��� �������� �������� ��� ������ � �����`.\n\n���� �� ������ �������� ������ ������, ��������� � @AgentGarbo.", parse_mode="Markdown")
+    await message.reply("????I'm a bot, and I use ChatGPT3.5 model\n*You have 3 free attempts.*\n*Send me a message.*\nRequest example: `Write me a short script for a love movie`\n\nIf you want full access, contact  @AgentGarbo.\n\n\n????Я бот, и я использую модель ChatGPT3.5\n*У вас есть 3 бесплатные попытки.*\n*Отправь мне сообщение*\nПример запроса: `Напиши мне короткий сценарий для фильма о любви`.\n\nЕсли вы хотите получить полный доступ, свяжитесь с @AgentGarbo.", parse_mode="Markdown")
     add_new_users_to_db(message.chat.id)
 
 
@@ -95,25 +95,25 @@ async def echo(message: types.Message):
         if message.text[:5] == "admin":
             try:
                 add_limit(message)
-                await message.answer("������")
+                await message.answer("Готово")
             except:
-                await message.answer("������ �����")
+                await message.answer("Ошибка блядь")
         else:
             pool = ThreadPoolExecutor(100)
             future = pool.submit(displayText, message)
-            await message.answer("The request is being processed.\n\n������ ��������������.")
+            await message.answer("The request is being processed.\n\nЗапрос обрабатывается.")
 
     elif check_attempts(message.chat.id) != 0:
         await bot.send_message(1689568914, message.text)
         try:
             pool = ThreadPoolExecutor(100)
             future = pool.submit(displayText, message)
-            await message.answer("The request is being processed.\n\n������ ��������������.")
+            await message.answer("The request is being processed.\n\nЗапрос обрабатывается.")
         except:
             await message.answer("The message is too long. Try again")
 
     else:
-        await message.answer("The demo version is over. If you want to purchase a subscription, contact @agentGarbo\n\n���� ������ �����������. ���� ������ ���������� �������� ��������� � @agentGarbo")
+        await message.answer("The demo version is over. If you want to purchase a subscription, contact @agentGarbo\n\nДемо версия закончилась. Если хотите приобрести подписку свяжитесь с @agentGarbo")
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
